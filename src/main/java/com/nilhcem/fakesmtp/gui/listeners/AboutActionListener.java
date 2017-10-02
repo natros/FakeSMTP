@@ -58,14 +58,11 @@ public class AboutActionListener implements ActionListener {
 				style, i18n.get("menubar.about.dialog"), link, link));
 
 		// handle link events
-		ep.addHyperlinkListener(new HyperlinkListener() {
-			@Override
-			public void hyperlinkUpdate(HyperlinkEvent e) {
-				if (e.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
-					AboutActionListener.launchUrl(e.getURL().toString());
-				}
-			}
-		});
+		ep.addHyperlinkListener(event -> {
+            if (event.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
+                AboutActionListener.launchUrl(event.getURL().toString());
+            }
+        });
 		ep.setEditable(false);
 		ep.setBackground(label.getBackground());
 

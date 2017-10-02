@@ -53,13 +53,10 @@ public final class PortTextField extends Observable implements Observer {
 		});
 
 		portTextField.setText(Configuration.INSTANCE.get("smtp.default.port"));
-		portTextField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setChanged();
-				notifyObservers();
-			}
-		});
+		portTextField.addActionListener(e -> {
+            setChanged();
+            notifyObservers();
+        });
 	}
 
 	/**

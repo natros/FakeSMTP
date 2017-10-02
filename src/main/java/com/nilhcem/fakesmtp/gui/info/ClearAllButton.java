@@ -37,27 +37,24 @@ public final class ClearAllButton extends Observable implements Observer {
 	 */
 	public ClearAllButton() {
 		button.setToolTipText(i18n.get("clearall.tooltip"));
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int answer = JOptionPane.showConfirmDialog(button.getParent(), i18n.get("clearall.delete.email"),
-					String.format(i18n.get("clearall.title"), Configuration.INSTANCE.get("application.name")),
-						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-				if (answer == JOptionPane.CLOSED_OPTION) {
-					return;
-				}
+		button.addActionListener(e -> {
+            int answer = JOptionPane.showConfirmDialog(button.getParent(), i18n.get("clearall.delete.email"),
+                String.format(i18n.get("clearall.title"), Configuration.INSTANCE.get("application.name")),
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (answer == JOptionPane.CLOSED_OPTION) {
+                return;
+            }
 
-				synchronized (SMTPServerHandler.INSTANCE.getMailSaver().getLock()) {
-				    // Note: Should delete emails before calling observers, since observers will clean the model.
-					if (answer == JOptionPane.YES_OPTION) {
-						SMTPServerHandler.INSTANCE.getMailSaver().deleteEmails();
-					}
-				    setChanged();
-				    notifyObservers();
-					button.setEnabled(false);
-				}
-			}
-		});
+            synchronized (SMTPServerHandler.INSTANCE.getMailSaver().getLock()) {
+                // Note: Should delete emails before calling observers, since observers will clean the model.
+                if (answer == JOptionPane.YES_OPTION) {
+                    SMTPServerHandler.INSTANCE.getMailSaver().deleteEmails();
+                }
+                setChanged();
+                notifyObservers();
+                button.setEnabled(false);
+            }
+        });
 		button.setEnabled(false);
 	}
 

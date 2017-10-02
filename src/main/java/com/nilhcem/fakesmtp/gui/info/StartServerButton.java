@@ -31,12 +31,7 @@ public final class StartServerButton extends Observable implements Observer {
 	 * </p>
 	 */
 	public StartServerButton() {
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				toggleButton();
-			}
-		});
+		button.addActionListener(e -> toggleButton());
 	}
 
 	/**

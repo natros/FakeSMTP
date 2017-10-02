@@ -7,6 +7,7 @@ import com.nilhcem.fakesmtp.model.UIModel;
 
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Observable;
@@ -39,26 +40,11 @@ public final class SaveMsgField extends Observable implements Observer {
 
 		if (!ArgsHandler.INSTANCE.memoryModeEnabled()) {
 			// Add a MouseListener
-			saveMsgField.addMouseListener(new MouseListener() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-				}
+			saveMsgField.addMouseListener(new MouseAdapter() {
 
 				@Override
 				public void mousePressed(MouseEvent e) {
 					openFolderSelection();
-				}
-
-				@Override
-				public void mouseReleased(MouseEvent e) {
-				}
-
-				@Override
-				public void mouseEntered(MouseEvent e) {
-				}
-
-				@Override
-				public void mouseExited(MouseEvent e) {
 				}
 
 				private void openFolderSelection() {

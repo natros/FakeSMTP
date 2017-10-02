@@ -113,7 +113,7 @@ public enum ArgsHandler {
 
 		String relaydomains = cmd.getOptionValue(OPT_RELAYDOMAINS_SHORT);
 		if (relaydomains != null) {
-			List<String> domains = new ArrayList<String>();
+			List<String> domains = new ArrayList<>();
 			for (String domain : Arrays.asList(relaydomains.split(OPT_RELAYDOMAINS_SEPARATOR))) {
 				domains.add(domain.trim());
 			}
