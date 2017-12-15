@@ -68,11 +68,8 @@ public enum Configuration {
 	 * @throws IOException
 	 */
 	public void saveToFile(File file) throws IOException {
-		FileOutputStream fos = new FileOutputStream(file);
-		try {
+		try (FileOutputStream fos = new FileOutputStream(file)) {
 			config.store(fos, "Last user settings");
-		} finally {
-			IOUtils.closeQuietly(fos);
 		}
 	}
 
@@ -95,12 +92,9 @@ public enum Configuration {
 	 */
 	public Configuration loadFromFile(File file) throws IOException {
 		if (file.exists() && file.canRead()) {
-			FileInputStream fis = new FileInputStream(file);
-			try {
-				config.load(fis);
-			} finally {
-				IOUtils.closeQuietly(fis);
-			}
+			try (FileInputStream fis = new FileInputStream(file)) {
+                config.load(fis);
+            }
 		}
 		return INSTANCE;
 	}
