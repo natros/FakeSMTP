@@ -31,11 +31,7 @@ public final class UncaughtExceptionHandler implements Thread.UncaughtExceptionH
 			if (SwingUtilities.isEventDispatchThread()) {
 				showException(t, e);
 			} else {
-				SwingUtilities.invokeLater(new Runnable() {
-					public void run() {
-						showException(t, e);
-					}
-				});
+				SwingUtilities.invokeLater(() -> showException(t, e));
 			}
 		} catch (Exception excpt) {
 			LOGGER.error("", excpt);

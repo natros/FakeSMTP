@@ -1,10 +1,10 @@
 package com.nilhcem.fakesmtp.core.server;
 
-import static org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Observable;
 import java.util.Observer;
 import org.junit.BeforeClass;
@@ -14,6 +14,10 @@ import com.nilhcem.fakesmtp.core.I18n;
 import com.nilhcem.fakesmtp.model.EmailModel;
 import com.nilhcem.fakesmtp.model.UIModel;
 import com.nilhcem.fakesmtp.server.MailSaver;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.*;
+
 
 public class MailServerTest {
 	private static MailSaver saver;
@@ -61,7 +65,7 @@ public class MailServerTest {
 			}
 		};
 		saver.addObserver(mockObserver);
-		assertTrue(saver.countObservers() != 0);
+		assertThat(saver.countObservers()).isNotZero();
 		saver.saveEmailAndNotify(from, to, data);
 		saver.deleteObserver(mockObserver);
 	}
@@ -87,7 +91,7 @@ public class MailServerTest {
 	}
 
 	private InputStream fromString(String str) throws UnsupportedEncodingException {
-		byte[] bytes = str.getBytes(I18n.UTF8);
+		byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
 		return new ByteArrayInputStream(bytes);
 	}
 }
