@@ -8,8 +8,6 @@ import com.nilhcem.fakesmtp.gui.listeners.ExitActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Observable;
 
 /**
@@ -83,12 +81,9 @@ public final class MenuBar extends Observable {
 		if (ArgsHandler.INSTANCE.memoryModeEnabled()) {
 			mailsLocation.setEnabled(false);
 		} else {
-			mailsLocation.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					setChanged();
-					notifyObservers();
-				}
+			mailsLocation.addActionListener(e -> {
+				setChanged();
+				notifyObservers();
 			});
 		}
 

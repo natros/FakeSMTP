@@ -13,7 +13,6 @@ import org.apache.commons.cli.ParseException;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -113,8 +112,8 @@ public enum ArgsHandler {
 
 		String relaydomains = cmd.getOptionValue(OPT_RELAYDOMAINS_SHORT);
 		if (relaydomains != null) {
-			List<String> domains = new ArrayList<String>();
-			for (String domain : Arrays.asList(relaydomains.split(OPT_RELAYDOMAINS_SEPARATOR))) {
+			List<String> domains = new ArrayList<>();
+			for (String domain : relaydomains.split(OPT_RELAYDOMAINS_SEPARATOR)) {
 				domains.add(domain.trim());
 			}
 			UIModel.INSTANCE.setRelayDomains(domains);

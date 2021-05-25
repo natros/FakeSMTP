@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -131,7 +132,7 @@ public final class MailSaver extends Observable {
 	 */
 	private String convertStreamToString(InputStream is) {
 		final long lineNbToStartCopy = 4; // Do not copy the first 4 lines (received part)
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName(I18n.UTF8)));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 		StringBuilder sb = new StringBuilder();
 
 		String line;

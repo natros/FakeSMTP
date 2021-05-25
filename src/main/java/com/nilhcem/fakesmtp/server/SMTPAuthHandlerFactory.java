@@ -21,7 +21,7 @@ import org.subethamail.smtp.AuthenticationHandlerFactory;
 
 	@Override
 	public List<String> getAuthenticationMechanisms() {
-		List<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<>();
 		result.add(SMTPAuthHandlerFactory.LOGIN_MECHANISM);
 		return result;
 	}

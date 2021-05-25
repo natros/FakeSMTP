@@ -140,6 +140,7 @@ public final class MailsListPane implements Observer {
 
 		// Auto scroll tab to bottom when a new element is inserted
 		table.addComponentListener(new ComponentAdapter() {
+			@Override
 			public void componentResized(ComponentEvent e) {
 				table.scrollRectToVisible(new Rectangle(table.getCellRect(nbElements, 0, true)));
 			}
@@ -152,6 +153,7 @@ public final class MailsListPane implements Observer {
 		table.setModel(model);
 
 		mailsListPane.addComponentListener(new ComponentAdapter() {
+			@Override
 			public void componentResized(ComponentEvent e) {
 				// When the width of a column is changed, only the columns to the left and right of the margin change
 				table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
