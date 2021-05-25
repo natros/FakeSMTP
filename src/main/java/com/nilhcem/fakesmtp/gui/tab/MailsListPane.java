@@ -65,6 +65,7 @@ public final class MailsListPane implements Observer {
 	private final DefaultTableModel model = new DefaultTableModel() {
 		private static final long serialVersionUID = -6716294637919469299L;
 
+		@Override
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
 			return false;
 		}
