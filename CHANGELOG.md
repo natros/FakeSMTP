@@ -1,3 +1,7 @@
+# v2.2
+
+- Use Java 11
+
 # v2.1
 
 - Use Java 8
