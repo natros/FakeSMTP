@@ -17,8 +17,9 @@ public final class SendEmailsIT {
 	private static final Logger logger = LoggerFactory.getLogger(SendEmailsIT.class);
 
 	private static final String EMOJI_EMAIL = "📧";
-	private static final String EMOJI_LOVE_LETTER = "\uD83D\uDC8C";
-	private static final String EMOJI_HAPPY_FACE = "\uD83D\uDE00";
+	private static final String EMOJI_LOVE_LETTER = "💌";
+	private static final String EMOJI_HAPPY_FACE = "😀";
+	private static final String EMOJI_ALIEN = "👽";
 
 	@BeforeClass
 	public static void displayInfo() {
@@ -48,8 +49,11 @@ public final class SendEmailsIT {
 		email.setFrom("user@gmail.com");
 		email.addTo("foo@bar.com");
 		email.addHeader("Content-Type", TEXT_PLAIN + "; charset=" + StandardCharsets.UTF_8);
-		email.setSubject(EMOJI_EMAIL + " Simple email using Unicode / Emojis");
-		email.setMsg("This is a simple plain text email / UTF-8 \n" + EMOJI_HAPPY_FACE);
+		email.setSubject(EMOJI_EMAIL + " Simple email using Unicode / Emojis " + EMOJI_LOVE_LETTER);
+		email.setMsg("This is a simple plain text email / UTF-8 \n" +
+				"\\_" + EMOJI_HAPPY_FACE + "_/ \n"
+				+ "\n"
+				+ EMOJI_ALIEN);
 		email.send();
 	}
 
