@@ -1,17 +1,16 @@
 package com.nilhcem.fakesmtp.gui.info;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
 import com.nilhcem.fakesmtp.core.Configuration;
 import com.nilhcem.fakesmtp.core.I18n;
-import com.nilhcem.fakesmtp.core.exception.*;
+import com.nilhcem.fakesmtp.core.exception.BindPortException;
+import com.nilhcem.fakesmtp.core.exception.InvalidHostException;
+import com.nilhcem.fakesmtp.core.exception.InvalidPortException;
+import com.nilhcem.fakesmtp.core.exception.OutOfRangePortException;
 import com.nilhcem.fakesmtp.model.UIModel;
+
+import javax.swing.*;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Button to start the SMTP server.

@@ -17,6 +17,8 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import org.slf4j.Logger;
 
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 /**
  * Provides the main window of the application.
  *
@@ -58,7 +60,7 @@ public final class MainFrame {
 
 		MainWindowListener windowListener = new MainWindowListener(this);
 
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		mainFrame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
