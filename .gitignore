@@ -3,18 +3,18 @@
 \#*
 
 # Target folder
-target/*
+target/
 
 # Eclipse files
 .classpath
 .pmd
 .project
-.settings/*
+.settings/
 
 # IntelliJ files
-.idea
+.idea/
 *.iml
 
 # Received emails folder
-received-emails/*
-emails-recus/*
+received-emails/
+emails-recus/
