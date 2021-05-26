@@ -61,18 +61,13 @@ public final class MailSaver extends Observable {
 		}
 
 		// We move everything that we can move outside the synchronized block to limit the impact
-		EmailModel model = new EmailModel();
-		model.setFrom(from);
-		model.setTo(to);
 		String mailContent = convertStreamToString(data);
-		model.setSubject(getSubjectFromStr(mailContent));
-		model.setEmailStr(mailContent);
+		String subject = getSubjectFromStr(mailContent);
 
 		synchronized (getLock()) {
 			String filePath = saveEmailToFile(mailContent);
 
-			model.setReceivedDate(new Date());
-			model.setFilePath(filePath);
+			EmailModel model = new EmailModel(from, to, subject, mailContent, new Date(), filePath);
 
 			setChanged();
 			notifyObservers(model);
