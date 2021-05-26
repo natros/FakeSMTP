@@ -8,9 +8,17 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.charset.StandardCharsets;
+
+import static org.apache.commons.mail.EmailConstants.TEXT_PLAIN;
+
 public final class SendEmailsIT {
 
 	private static final Logger logger = LoggerFactory.getLogger(SendEmailsIT.class);
+
+	private static final String EMOJI_EMAIL = "📧";
+	private static final String EMOJI_LOVE_LETTER = "\uD83D\uDC8C";
+	private static final String EMOJI_HAPPY_FACE = "\uD83D\uDE00";
 
 	@BeforeClass
 	public static void displayInfo() {
@@ -28,6 +36,20 @@ public final class SendEmailsIT {
 		email.setSubject("Simple email");
 		email.setMsg("This is a simple plain text email :-)");
 		email.addTo("foo@bar.com");
+		email.send();
+	}
+
+	@Test
+	public void sendSimpleTestEmailWithUTF8() throws EmailException {
+		Email email = new SimpleEmail();
+		email.setHostName(TestConfig.HOST);
+		email.setSmtpPort(TestConfig.PORT_INTEGRATION_TESTS);
+		email.setStartTLSEnabled(true);
+		email.setFrom("user@gmail.com");
+		email.addTo("foo@bar.com");
+		email.addHeader("Content-Type", TEXT_PLAIN + "; charset=" + StandardCharsets.UTF_8);
+		email.setSubject(EMOJI_EMAIL + " Simple email using Unicode / Emojis");
+		email.setMsg("This is a simple plain text email / UTF-8 \n" + EMOJI_HAPPY_FACE);
 		email.send();
 	}
 
