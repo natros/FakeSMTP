@@ -1,6 +1,7 @@
 package com.nilhcem.fakesmtp;
 
 import com.apple.eawt.Application;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.nilhcem.fakesmtp.core.ArgsHandler;
 import com.nilhcem.fakesmtp.core.Configuration;
 import com.nilhcem.fakesmtp.core.exception.UncaughtExceptionHandler;
@@ -94,7 +95,7 @@ public final class FakeSMTP {
                   Configuration.INSTANCE.get("application.name"));
               UIManager.put("swing.boldMetal", Boolean.FALSE);
               try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                UIManager.setLookAndFeel(new FlatLightLaf());
               } catch (Exception e) {
                 LOGGER.error("", e);
               }
