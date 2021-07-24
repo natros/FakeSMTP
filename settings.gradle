@@ -7,11 +7,6 @@ pluginManagement {
   }
   repositories {
     gradlePluginPortal()
-    maven {
-      name = 'ipb'
-      url = "${ipbUrl}"
-      credentials(PasswordCredentials)
-    }
   }
 }
 
