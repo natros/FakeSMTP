@@ -3,7 +3,6 @@
 \#*
 
 # Target folder
-target/
 build/
 
 # Eclipse files
