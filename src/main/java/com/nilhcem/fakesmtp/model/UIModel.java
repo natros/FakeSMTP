@@ -33,8 +33,6 @@ public enum UIModel {
   private String savePath = I18n.INSTANCE.get("emails.default.dir");
   private List<String> relayDomains;
 
-  UIModel() {}
-
   /**
    * Happens when a user clicks on the start button.
    *

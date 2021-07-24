@@ -22,8 +22,6 @@ public enum SMTPServerHandler {
   private final SMTPServer smtpServer =
       new SMTPServer(new SimpleMessageListenerAdapter(myListener), new SMTPAuthHandlerFactory());
 
-  SMTPServerHandler() {}
-
   /**
    * Starts the server on the port and address specified in parameters.
    *

@@ -19,6 +19,7 @@ import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.subethamail.smtp.server.Session;
@@ -90,7 +91,7 @@ public final class MailSaver extends Observable {
    * @param is the InputStream to be converted.
    * @return the converted string object, containing data from the InputStream passed in parameters.
    */
-  private String convertStreamToString(InputStream is) {
+  private static String convertStreamToString(InputStream is) {
     final long lineNbToStartCopy = 4; // Do not copy the first 4 lines (received part)
     BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
     StringBuilder sb = new StringBuilder();
@@ -115,7 +116,7 @@ public final class MailSaver extends Observable {
    * @param data a string representing the email content.
    * @return the subject of the email, or an empty subject if not found.
    */
-  private String getSubjectFromStr(String data) {
+  private static String getSubjectFromStr(String data) {
     try {
       BufferedReader reader = new BufferedReader(new StringReader(data));
 
@@ -151,7 +152,7 @@ public final class MailSaver extends Observable {
    * @param mailContent the content of the email to be saved.
    * @return the path of the created file.
    */
-  private String saveEmailToFile(String mailContent) {
+  private @Nullable String saveEmailToFile(String mailContent) {
     if (ArgsHandler.INSTANCE.memoryModeEnabled()) {
       return null;
     }

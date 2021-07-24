@@ -1,5 +1,6 @@
 package com.nilhcem.fakesmtp.server;
 
+import org.jetbrains.annotations.Nullable;
 import org.subethamail.smtp.AuthenticationHandler;
 
 /**
@@ -33,7 +34,7 @@ import org.subethamail.smtp.AuthenticationHandler;
    *     back to the client.
    */
   @Override
-  public String auth(String clientInput) {
+  public @Nullable String auth(String clientInput) {
     String prompt;
 
     if (++pass == 1) {

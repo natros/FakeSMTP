@@ -21,7 +21,7 @@ import javax.swing.JFileChooser;
  */
 public final class DirChooser extends Observable implements Observer {
   private final JFileChooser dirChooser = new JFileChooser();
-  private Component parent;
+  private final Component parent;
 
   /**
    * Creates a {@code JFileChooser} component and sets it to be for directories only.
