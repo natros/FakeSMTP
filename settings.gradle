@@ -1,0 +1,35 @@
+pluginManagement {
+  plugins {
+    id 'com.gradle.enterprise' version '3.6.3'
+    // id 'com.github.gmazzo.buildconfig' version '3.0.2'
+    id 'com.github.ben-manes.versions' version '0.39.0'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+  }
+  repositories {
+    gradlePluginPortal()
+    maven {
+      name = 'ipb'
+      url = "${ipbUrl}"
+      credentials(PasswordCredentials)
+    }
+  }
+}
+
+plugins {
+  id 'com.gradle.enterprise'
+}
+
+dependencyResolutionManagement {
+  repositories {
+    mavenCentral()
+  }
+}
+
+gradleEnterprise {
+  buildScan {
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
+  }
+}
+
+rootProject.name = 'fakesmtp'

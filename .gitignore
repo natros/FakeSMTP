@@ -4,6 +4,7 @@
 
 # Target folder
 target/
+build/
 
 # Eclipse files
 .classpath
@@ -18,3 +19,5 @@ target/
 # Received emails folder
 received-emails/
 emails-recus/
+
+.gradle/

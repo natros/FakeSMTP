@@ -1,0 +1,55 @@
+plugins {
+  id 'application'
+  id 'com.github.ben-manes.versions'
+}
+
+group = 'com.nilhcem.fakesmtp'
+
+def isNonStable = {
+  String version ->
+    def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any {
+      it -> version.toUpperCase().contains(it)
+    }
+    def regex = /^[0-9,.v-]+(-jre)?$/
+    return !stableKeyword && !(version ==~ regex)
+}
+
+tasks.named('dependencyUpdates').configure {
+  checkForGradleUpdate = true
+  rejectVersionIf {
+    isNonStable(it.candidate.version)
+  }
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(11)
+  }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  options.compilerArgs += '-parameters'
+}
+
+tasks.named('test', Test).configure {
+  useJUnitPlatform()
+}
+
+dependencies {
+  implementation 'com.miglayout:miglayout-swing:5.3'
+  implementation 'org.subethamail:subethasmtp:3.1.7'
+  implementation 'org.slf4j:slf4j-api:1.7.30'
+  implementation 'ch.qos.logback:logback-classic:1.2.3'
+  implementation 'commons-io:commons-io:2.9.0'
+  implementation 'commons-cli:commons-cli:1.4'
+  implementation 'com.apple:AppleJavaExtensions:1.4'
+  implementation 'com.formdev:flatlaf:1.4'
+
+  testImplementation 'junit:junit:4.13.2'
+  testImplementation 'org.assertj:assertj-core:3.19.0'
+  testImplementation 'org.apache.commons:commons-email:1.5'
+}
+
+application {
+  mainClass.set('com.nilhcem.fakesmtp.FakeSMTP')
+}
