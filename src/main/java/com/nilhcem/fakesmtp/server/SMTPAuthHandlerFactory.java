@@ -12,17 +12,17 @@ import org.subethamail.smtp.AuthenticationHandlerFactory;
  * @since 1.2
  */
 /*package*/ final class SMTPAuthHandlerFactory implements AuthenticationHandlerFactory {
-	private static final String LOGIN_MECHANISM = "LOGIN";
+  private static final String LOGIN_MECHANISM = "LOGIN";
 
-	@Override
-	public AuthenticationHandler create() {
-		return new SMTPAuthHandler();
-	}
+  @Override
+  public AuthenticationHandler create() {
+    return new SMTPAuthHandler();
+  }
 
-	@Override
-	public List<String> getAuthenticationMechanisms() {
-		List<String> result = new ArrayList<>();
-		result.add(SMTPAuthHandlerFactory.LOGIN_MECHANISM);
-		return result;
-	}
+  @Override
+  public List<String> getAuthenticationMechanisms() {
+    List<String> result = new ArrayList<>();
+    result.add(LOGIN_MECHANISM);
+    return result;
+  }
 }

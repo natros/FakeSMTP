@@ -9,14 +9,14 @@ import java.util.Observable;
  * @since 1.0
  */
 public final class SMTPLogsObservable extends Observable {
-	/**
-	 * Notify the {@code LogsPane} object when a new log is received.
-	 *
-	 * @param arg a String representing the received log.
-	 */
-	@Override
-	public void notifyObservers(Object arg) {
-		setChanged();
-		super.notifyObservers(arg);
-	}
+  /**
+   * Notify the {@code LogsPane} object when a new log is received.
+   *
+   * @param arg a String representing the received log.
+   */
+  @Override
+  public void notifyObservers(Object arg) {
+    setChanged();
+    super.notifyObservers(arg);
+  }
 }

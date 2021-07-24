@@ -4,11 +4,10 @@ import com.nilhcem.fakesmtp.core.ArgsHandler;
 import com.nilhcem.fakesmtp.core.I18n;
 import com.nilhcem.fakesmtp.gui.listeners.AboutActionListener;
 import com.nilhcem.fakesmtp.gui.listeners.ExitActionListener;
-
+import java.util.Observable;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import java.util.Observable;
 
 /**
  * Provides the menu bar of the application.
@@ -17,97 +16,95 @@ import java.util.Observable;
  * @since 1.0
  */
 public final class MenuBar extends Observable {
+  private final I18n i18n = I18n.INSTANCE;
+  private final JMenuBar menuBar = new JMenuBar();
+  private final MainFrame mainFrame;
 
-	private final I18n i18n = I18n.INSTANCE;
-	private final JMenuBar menuBar = new JMenuBar();
-	private final MainFrame mainFrame;
+  /**
+   * Creates the menu bar and the different menus (file / edit / help).
+   *
+   * @param mainFrame MainFrame class required for the closing action.
+   */
+  public MenuBar(MainFrame mainFrame) {
+    this.mainFrame = mainFrame;
 
-	/**
-	 * Creates the menu bar and the different menus (file / edit / help).
-	 *
-	 * @param mainFrame MainFrame class required for the closing action.
-	 */
-	public MenuBar(MainFrame mainFrame) {
-		this.mainFrame = mainFrame;
+    menuBar.add(createFileMenu());
+    menuBar.add(createEditMenu());
+    menuBar.add(createHelpMenu());
+  }
 
-		menuBar.add(createFileMenu());
-		menuBar.add(createEditMenu());
-		menuBar.add(createHelpMenu());
-	}
+  /**
+   * Creates the file menu.
+   *
+   * <p>The file menu contains an "Exit" item, to quit the application.
+   *
+   * @return the newly created file menu.
+   */
+  private JMenu createFileMenu() {
+    JMenu fileMenu = new JMenu(i18n.get("menubar.file"));
+    fileMenu.setMnemonic(i18n.get("menubar.mnemo.file").charAt(0));
 
-	/**
-	 * Returns the JMenuBar object.
-	 *
-	 * @return the JMenuBar object.
-	 */
-	public JMenuBar get() {
-		return menuBar;
-	}
+    JMenuItem exit = new JMenuItem(i18n.get("menubar.exit"));
+    exit.setMnemonic(i18n.get("menubar.mnemo.exit").charAt(0));
+    exit.addActionListener(new ExitActionListener(mainFrame));
 
-	/**
-	 * Creates the file menu.
-	 * <p>
-	 * The file menu contains an "Exit" item, to quit the application.
-	 * </p>
-	 *
-	 * @return the newly created file menu.
-	 */
-	private JMenu createFileMenu() {
-		JMenu fileMenu = new JMenu(i18n.get("menubar.file"));
-		fileMenu.setMnemonic(i18n.get("menubar.mnemo.file").charAt(0));
+    fileMenu.add(exit);
+    return fileMenu;
+  }
 
-		JMenuItem exit = new JMenuItem(i18n.get("menubar.exit"));
-		exit.setMnemonic(i18n.get("menubar.mnemo.exit").charAt(0));
-		exit.addActionListener(new ExitActionListener(mainFrame));
+  /**
+   * Creates the edit menu.
+   *
+   * <p>The edit menu contains a "Messages location" item, to define the location of the incoming
+   * mails.
+   *
+   * @return the newly created edit menu.
+   */
+  private JMenu createEditMenu() {
+    JMenu editMenu = new JMenu(i18n.get("menubar.edit"));
+    editMenu.setMnemonic(i18n.get("menubar.mnemo.edit").charAt(0));
 
-		fileMenu.add(exit);
-		return fileMenu;
-	}
+    JMenuItem mailsLocation = new JMenuItem(i18n.get("menubar.messages.location"));
+    mailsLocation.setMnemonic(i18n.get("menubar.mnemo.msglocation").charAt(0));
+    if (ArgsHandler.INSTANCE.memoryModeEnabled()) {
+      mailsLocation.setEnabled(false);
+    } else {
+      mailsLocation.addActionListener(
+          e -> {
+            setChanged();
+            notifyObservers();
+          });
+    }
 
-	/**
-	 * Creates the edit menu.
-	 * <p>
-	 * The edit menu contains a "Messages location" item, to define the location of the incoming mails.
-	 * </p>
-	 *
-	 * @return the newly created edit menu.
-	 */
-	private JMenu createEditMenu() {
-		JMenu editMenu = new JMenu(i18n.get("menubar.edit"));
-		editMenu.setMnemonic(i18n.get("menubar.mnemo.edit").charAt(0));
+    editMenu.add(mailsLocation);
+    return editMenu;
+  }
 
-		JMenuItem mailsLocation = new JMenuItem(i18n.get("menubar.messages.location"));
-		mailsLocation.setMnemonic(i18n.get("menubar.mnemo.msglocation").charAt(0));
-		if (ArgsHandler.INSTANCE.memoryModeEnabled()) {
-			mailsLocation.setEnabled(false);
-		} else {
-			mailsLocation.addActionListener(e -> {
-				setChanged();
-				notifyObservers();
-			});
-		}
+  /**
+   * Creates the help menu.
+   *
+   * <p>The help menu contains an "About" item, to display some software information.
+   *
+   * @return the newly created help menu.
+   */
+  private JMenu createHelpMenu() {
+    JMenu helpMenu = new JMenu(i18n.get("menubar.help"));
+    helpMenu.setMnemonic(i18n.get("menubar.mnemo.help").charAt(0));
 
-		editMenu.add(mailsLocation);
-		return editMenu;
-	}
+    JMenuItem about = new JMenuItem(i18n.get("menubar.about"));
+    about.setMnemonic(i18n.get("menubar.mnemo.about").charAt(0));
+    about.addActionListener(new AboutActionListener(menuBar.getParent()));
 
-	/**
-	 * Creates the help menu.
-	 * <p>
-	 * The help menu contains an "About" item, to display some software information.
-	 * </p>
-	 *
-	 * @return the newly created help menu.
-	 */
-	private JMenu createHelpMenu() {
-		JMenu helpMenu = new JMenu(i18n.get("menubar.help"));
-		helpMenu.setMnemonic(i18n.get("menubar.mnemo.help").charAt(0));
+    helpMenu.add(about);
+    return helpMenu;
+  }
 
-		JMenuItem about = new JMenuItem(i18n.get("menubar.about"));
-		about.setMnemonic(i18n.get("menubar.mnemo.about").charAt(0));
-		about.addActionListener(new AboutActionListener(menuBar.getParent()));
-
-		helpMenu.add(about);
-		return helpMenu;
-	}
+  /**
+   * Returns the JMenuBar object.
+   *
+   * @return the JMenuBar object.
+   */
+  public JMenuBar get() {
+    return menuBar;
+  }
 }

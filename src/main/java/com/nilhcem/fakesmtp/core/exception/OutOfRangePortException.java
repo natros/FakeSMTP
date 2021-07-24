@@ -7,9 +7,9 @@ package com.nilhcem.fakesmtp.core.exception;
  * @since 1.0
  */
 public final class OutOfRangePortException extends AbstractPortException {
-	private static final long serialVersionUID = -8357518994968551990L;
+  private static final long serialVersionUID = -8357518994968551990L;
 
-	public OutOfRangePortException(Exception e, int port) {
-		super(e, port);
-	}
+  public OutOfRangePortException(Exception e, int port) {
+    super(e, port);
+  }
 }

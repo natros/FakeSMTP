@@ -13,34 +13,33 @@ import java.awt.PopupMenu;
  * @since 2.1
  */
 public class TrayPopup {
+  private final I18n i18n = I18n.INSTANCE;
+  private final PopupMenu popup = new PopupMenu();
 
-	private final I18n i18n = I18n.INSTANCE;
-	private final PopupMenu popup = new PopupMenu();
+  /**
+   * The popup menu used by the icon in the system tray.
+   *
+   * @param mainFrame MainFrame class.
+   */
+  public TrayPopup(MainFrame mainFrame) {
+    // Create a popup menu components
+    MenuItem aboutItem = new MenuItem(i18n.get("menubar.about"));
+    aboutItem.addActionListener(new AboutActionListener(null));
 
-	/**
-	 * The popup menu used by the icon in the system tray.
-	 *
-	 * @param mainFrame MainFrame class.
-	 */
-	public TrayPopup(final MainFrame mainFrame) {
-		// Create a popup menu components
-		MenuItem aboutItem = new MenuItem(i18n.get("menubar.about"));
-		aboutItem.addActionListener(new AboutActionListener(null));
+    MenuItem exitItem = new MenuItem(i18n.get("menubar.exit"));
+    exitItem.addActionListener(new ExitActionListener(mainFrame));
 
-		MenuItem exitItem = new MenuItem(i18n.get("menubar.exit"));
-		exitItem.addActionListener(new ExitActionListener(mainFrame));
+    popup.add(aboutItem);
+    popup.addSeparator();
+    popup.add(exitItem);
+  }
 
-		popup.add(aboutItem);
-		popup.addSeparator();
-		popup.add(exitItem);
-	}
-
-	/**
-	 * Returns the PopupMenu object.
-	 *
-	 * @return the PopupMenu object.
-	 */
-	public PopupMenu get() {
-		return popup;
-	}
+  /**
+   * Returns the PopupMenu object.
+   *
+   * @return the PopupMenu object.
+   */
+  public PopupMenu get() {
+    return popup;
+  }
 }

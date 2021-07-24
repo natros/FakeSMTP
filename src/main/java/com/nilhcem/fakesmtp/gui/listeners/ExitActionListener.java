@@ -11,21 +11,20 @@ import java.awt.event.ActionListener;
  * @since 2.1
  */
 public class ExitActionListener implements ActionListener {
+  private final MainFrame mainFrame;
 
-	private final MainFrame mainFrame;
+  /**
+   * MainFrame is used for closing.
+   *
+   * @param mainFrame MainFrame window that will be closed.
+   */
+  public ExitActionListener(MainFrame mainFrame) {
+    this.mainFrame = mainFrame;
+  }
 
-	/**
-	 * MainFrame is used for closing.
-	 *
-	 * @param mainFrame MainFrame window that will be closed.
-	 */
-	public ExitActionListener(MainFrame mainFrame) {
-		this.mainFrame = mainFrame;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		mainFrame.close();
-		System.exit(0);
-	}
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    mainFrame.close();
+    System.exit(0);
+  }
 }

@@ -15,97 +15,94 @@ import org.slf4j.LoggerFactory;
  * @since 1.0
  */
 public enum Configuration {
-	INSTANCE;
+  INSTANCE;
+  private static final String CONFIG_FILE = "/configuration.properties";
+  private static final String USER_CONFIG_FILE = ".fakeSMTP.properties";
+  private final Properties config = new Properties();
 
-	private static final String CONFIG_FILE = "/configuration.properties";
-	private static final String USER_CONFIG_FILE = ".fakeSMTP.properties";
-	private final Properties config = new Properties();
+  /** Opens the "{@code configuration.properties}" file and maps data. */
+  Configuration() {
+    InputStream in = getClass().getResourceAsStream(CONFIG_FILE);
+    try {
+      // Load defaults settings
+      config.load(in);
+      in.close();
+      // and override them from user settings
+      loadFromUserProfile();
+    } catch (IOException e) {
+      LoggerFactory.getLogger(Configuration.class).error("", e);
+    }
+  }
 
-	/**
-	 * Opens the "{@code configuration.properties}" file and maps data.
-	 */
-	Configuration() {
-		InputStream in = getClass().getResourceAsStream(CONFIG_FILE);
-		try {
-			// Load defaults settings
-			config.load(in);
-			in.close();
-			// and override them from user settings
-			loadFromUserProfile();
-		} catch (IOException e) {
-			LoggerFactory.getLogger(Configuration.class).error("", e);
-		}
-	}
+  /**
+   * Loads configuration from the .fakesmtp.properties file in user profile directory. Calls {@link
+   * Configuration#loadFromFile(File)}.
+   *
+   * @return INSTANCE.
+   * @throws IOException
+   */
+  public Configuration loadFromUserProfile() throws IOException {
+    return loadFromFile(new File(System.getProperty("user.home"), USER_CONFIG_FILE));
+  }
 
-	/**
-	 * Returns the value of a specific entry from the "{@code configuration.properties}" file.
-	 *
-	 * @param key a string representing the key from a key/value couple.
-	 * @return the value of the key, or an empty string if the key was not found.
-	 */
-	public String get(String key) {
-		if (config.containsKey(key)) {
-			return config.getProperty(key);
-		}
-		return "";
-	}
+  /**
+   * Loads configuration from file.
+   *
+   * @param file file to load configuration.
+   * @return INSTANCE.
+   * @throws IOException
+   */
+  public Configuration loadFromFile(File file) throws IOException {
+    if (file.exists() && file.canRead()) {
+      try (FileInputStream fis = new FileInputStream(file)) {
+        config.load(fis);
+      }
+    }
+    return INSTANCE;
+  }
 
-	/**
-	 * Sets the value of a specific entry.
-	 *
-	 * @param key a string representing the key from a key/value couple.
-	 * @param value the value of the key.
-	 */
-	public void set(String key, String value) {
-		config.setProperty(key, value);
-	}
+  /**
+   * Returns the value of a specific entry from the "{@code configuration.properties}" file.
+   *
+   * @param key a string representing the key from a key/value couple.
+   * @return the value of the key, or an empty string if the key was not found.
+   */
+  public String get(String key) {
+    if (config.containsKey(key)) {
+      return config.getProperty(key);
+    }
+    return "";
+  }
 
-	/**
-	 * Saves configuration to file.
-	 *
-	 * @param file file to save configuration.
-	 * @throws IOException
-	 */
-	public void saveToFile(File file) throws IOException {
-		try (FileOutputStream fos = new FileOutputStream(file)) {
-			config.store(fos, "Last user settings");
-		}
-	}
+  /**
+   * Sets the value of a specific entry.
+   *
+   * @param key a string representing the key from a key/value couple.
+   * @param value the value of the key.
+   */
+  public void set(String key, String value) {
+    config.setProperty(key, value);
+  }
 
-	/**
-	 * Saves configuration to the {@code .fakesmtp.properties} file in user profile directory.
-	 * Calls {@link Configuration#saveToFile(java.io.File)}.
-	 *
-	 * @throws IOException
-	 */
-	public void saveToUserProfile() throws IOException {
-		saveToFile(new File(System.getProperty("user.home"), USER_CONFIG_FILE));
-	}
+  /**
+   * Saves configuration to the {@code .fakesmtp.properties} file in user profile directory. Calls
+   * {@link Configuration#saveToFile(File)}.
+   *
+   * @throws IOException
+   */
+  public void saveToUserProfile() throws IOException {
+    saveToFile(new File(System.getProperty("user.home"), USER_CONFIG_FILE));
+  }
 
-	/**
-	 * Loads configuration from file.
-	 *
-	 * @param file file to load configuration.
-	 * @return INSTANCE.
-	 * @throws IOException
-	 */
-	public Configuration loadFromFile(File file) throws IOException {
-		if (file.exists() && file.canRead()) {
-			try (FileInputStream fis = new FileInputStream(file)) {
-				config.load(fis);
-			}
-		}
-		return INSTANCE;
-	}
-
-	/**
-	 * Loads configuration from the .fakesmtp.properties file in user profile directory.
-	 * Calls {@link Configuration#loadFromFile(java.io.File)}.
-	 *
-	 * @return INSTANCE.
-	 * @throws IOException
-	 */
-	public Configuration loadFromUserProfile() throws IOException {
-		return loadFromFile(new File(System.getProperty("user.home"), USER_CONFIG_FILE));
-	}
+  /**
+   * Saves configuration to file.
+   *
+   * @param file file to save configuration.
+   * @throws IOException
+   */
+  public void saveToFile(File file) throws IOException {
+    try (FileOutputStream fos = new FileOutputStream(file)) {
+      config.store(fos, "Last user settings");
+    }
+  }
 }
