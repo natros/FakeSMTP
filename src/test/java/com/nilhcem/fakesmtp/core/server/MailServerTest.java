@@ -1,11 +1,11 @@
 package com.nilhcem.fakesmtp.core.server;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.nilhcem.fakesmtp.model.EmailModel;
 import com.nilhcem.fakesmtp.model.UIModel;
@@ -13,28 +13,27 @@ import com.nilhcem.fakesmtp.server.MailSaver;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Observable;
 import java.util.Observer;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-public class MailServerTest {
+class MailServerTest {
   private static MailSaver saver;
 
-  @BeforeClass
-  public static void createMailSaver() {
+  @BeforeAll
+  static void createMailSaver() {
     saver = new MailSaver();
   }
 
   @Test
-  public void testGetLock() {
+  void testGetLock() {
     assertSame(saver, saver.getLock());
   }
 
   @Test
-  public void testSaveDeleteEmail() throws UnsupportedEncodingException, InterruptedException {
+  void testSaveDeleteEmail() {
     final String from = "from@example.com";
     final String to = "to@example.com";
     final String subject = "Hello";
@@ -72,41 +71,40 @@ public class MailServerTest {
     saver.deleteObserver(mockObserver);
   }
 
-  private InputStream fromString(String str) throws UnsupportedEncodingException {
+  private static InputStream fromString(String str) {
     byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
     return new ByteArrayInputStream(bytes);
   }
 
-  private String getMockEmail(String from, String to, String subject, String content) {
+  private static String getMockEmail(String from, String to, String subject, String content) {
     String br = System.getProperty("line.separator");
 
-    StringBuilder sb =
-        new StringBuilder()
-            .append("Line 1 will be removed")
-            .append(br)
-            .append("Line 2 will be removed")
-            .append(br)
-            .append("Line 3 will be removed")
-            .append(br)
-            .append("Line 4 will be removed")
-            .append(br)
-            .append("Date: Thu, 15 May 2042 04:42:42 +0800 (CST)")
-            .append(br)
-            .append(String.format("From: \"%s\" <%s>%n", from, from))
-            .append(String.format("To: \"%s\" <%s>%n", to, to))
-            .append("Message-ID: <17000042.0.1300000000042.JavaMail.wtf@OMG00042>")
-            .append(br)
-            .append(String.format("Subject: %s%n", subject))
-            .append("MIME-Version: 1.0")
-            .append(br)
-            .append("Content-Type: text/plain; charset=us-ascii")
-            .append(br)
-            .append("Content-Transfer-Encoding: 7bit")
-            .append(br)
-            .append(br)
-            .append(content)
-            .append(br)
-            .append(br);
-    return sb.toString();
+    String sb =
+        "Line 1 will be removed"
+            + br
+            + "Line 2 will be removed"
+            + br
+            + "Line 3 will be removed"
+            + br
+            + "Line 4 will be removed"
+            + br
+            + "Date: Thu, 15 May 2042 04:42:42 +0800 (CST)"
+            + br
+            + String.format("From: \"%s\" <%s>%n", from, from)
+            + String.format("To: \"%s\" <%s>%n", to, to)
+            + "Message-ID: <17000042.0.1300000000042.JavaMail.wtf@OMG00042>"
+            + br
+            + String.format("Subject: %s%n", subject)
+            + "MIME-Version: 1.0"
+            + br
+            + "Content-Type: text/plain; charset=us-ascii"
+            + br
+            + "Content-Transfer-Encoding: 7bit"
+            + br
+            + br
+            + content
+            + br
+            + br;
+    return sb;
   }
 }

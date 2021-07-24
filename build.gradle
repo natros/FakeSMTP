@@ -45,9 +45,10 @@ dependencies {
   implementation "com.apple:AppleJavaExtensions:$appleJavaExtensionsVersion"
   implementation "com.formdev:flatlaf:$flatlafVersion"
 
-  testImplementation 'junit:junit:4.13.2'
+  testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
   testImplementation "org.assertj:assertj-core:$assertjVersion"
   testImplementation "org.apache.commons:commons-email:$commonsEmail"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
 application {

@@ -11,20 +11,20 @@ import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class SendEmailsIT {
+final class SendEmailsIT {
   private static final Logger logger = LoggerFactory.getLogger(SendEmailsIT.class);
   private static final String EMOJI_EMAIL = "📧";
   private static final String EMOJI_LOVE_LETTER = "💌";
   private static final String EMOJI_HAPPY_FACE = "😀";
   private static final String EMOJI_ALIEN = "👽";
 
-  @BeforeClass
-  public static void displayInfo() {
+  @BeforeAll
+  static void displayInfo() {
     logger.info("Launching integration tests...");
     logger.info(
         "You need to run the project and launch the SMTP server on port {} before testing.",
@@ -32,7 +32,7 @@ public final class SendEmailsIT {
   }
 
   @Test
-  public void sendSimpleTestEmail() throws EmailException {
+  void sendSimpleTestEmail() throws EmailException {
     Email email = new SimpleEmail();
     email.setHostName(TestConfig.HOST);
     email.setSmtpPort(TestConfig.PORT_INTEGRATION_TESTS);
@@ -45,7 +45,7 @@ public final class SendEmailsIT {
   }
 
   @Test
-  public void sendSimpleTestEmailWithUTF8() throws EmailException {
+  void sendSimpleTestEmailWithUTF8() throws EmailException {
     Email email = new SimpleEmail();
     email.setHostName(TestConfig.HOST);
     email.setSmtpPort(TestConfig.PORT_INTEGRATION_TESTS);
@@ -65,7 +65,7 @@ public final class SendEmailsIT {
   }
 
   @Test
-  public void sendEmailWithAttachment() throws EmailException {
+  void sendEmailWithAttachment() throws EmailException {
     // Create the attachment
     EmailAttachment attachment = new EmailAttachment();
     attachment.setPath("src/main/resources" + Configuration.INSTANCE.get("application.icon.path"));
@@ -90,7 +90,7 @@ public final class SendEmailsIT {
   }
 
   @Test
-  public void sendHTMLFormattedEmail() throws EmailException {
+  void sendHTMLFormattedEmail() throws EmailException {
     // Create the email message
     HtmlEmail email = new HtmlEmail();
     email.setHostName(TestConfig.HOST);
@@ -110,7 +110,7 @@ public final class SendEmailsIT {
   }
 
   @Test
-  public void sendEmailWithBase64Subject() throws EmailException {
+  void sendEmailWithBase64Subject() throws EmailException {
     Email email = new SimpleEmail();
     email.setHostName(TestConfig.HOST);
     email.setSmtpPort(TestConfig.PORT_INTEGRATION_TESTS);
@@ -122,7 +122,7 @@ public final class SendEmailsIT {
   }
 
   @Test
-  public void sendEmailToManyRecipientsWithTwoHeaders() throws EmailException {
+  void sendEmailToManyRecipientsWithTwoHeaders() throws EmailException {
     Email email = new SimpleEmail();
     email.setHostName(TestConfig.HOST);
     email.setSmtpPort(TestConfig.PORT_INTEGRATION_TESTS);
@@ -137,7 +137,7 @@ public final class SendEmailsIT {
   }
 
   @Test
-  public void sendEmailWithDots() throws EmailException {
+  void sendEmailWithDots() throws EmailException {
     Email email = new SimpleEmail();
     email.setDebug(true);
     email.setHostName(TestConfig.HOST);
