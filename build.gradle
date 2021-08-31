@@ -1,6 +1,7 @@
 plugins {
   id 'application'
   id 'com.github.ben-manes.versions'
+  id 'com.github.johnrengelman.shadow'
 }
 
 group = 'com.nilhcem.fakesmtp'
@@ -22,13 +23,13 @@ tasks.named('dependencyUpdates').configure {
 }
 
 java {
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(11)
-  }
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
 }
 
 tasks.withType(JavaCompile).configureEach {
   options.compilerArgs += '-parameters'
+  options.release.set(11)
 }
 
 tasks.named('test', Test).configure {
