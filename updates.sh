@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
-./gradlew dU|grep \\-\>|sort -u
+set -euo pipefail
+cd ${0%/*}
+
+echo "┌──────────────────────┐"
+echo "│ Project dependencies │"
+echo "└──────────────────────┘"
+./gradlew dU |grep \\-\>|sort -u

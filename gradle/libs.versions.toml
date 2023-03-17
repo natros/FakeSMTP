@@ -1,0 +1,28 @@
+[versions]
+annotations = "24.0.1"
+apple-java-ext = "1.4"
+assertj = "3.20.2"
+commons-cli = "1.4"
+commons-email = "1.5"
+commons-io = "2.11.0"
+flatlaf = "1.5"
+junit = "5.9.2"
+logback = "1.2.11"
+miglayout-swing = "11.0"
+slf4j = "1.7.36"
+subethasmtp = "3.1.7"
+
+[libraries]
+annotations = { module = "org.jetbrains:annotations", version.ref = "annotations" }
+apple-java-ext = { module = "com.apple:AppleJavaExtensions", version.ref = "apple-java-ext" }
+assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+commons-cli = { module = "commons-cli:commons-cli", version.ref = "commons-cli" }
+commons-email = { module = "org.apache.commons:commons-email", version.ref = "commons-email" }
+commons-io = { module = "commons-io:commons-io", version.ref = "commons-io" }
+flatlaf = { module = "com.formdev:flatlaf", version.ref = "flatlaf" }
+jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+miglayout-swing = { module = "com.miglayout:miglayout-swing", version.ref = "miglayout-swing" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+subethasmtp = { module = "org.subethamail:subethasmtp", version.ref = "subethasmtp" }
