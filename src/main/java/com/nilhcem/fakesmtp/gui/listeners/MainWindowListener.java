@@ -29,7 +29,9 @@ public class MainWindowListener extends WindowAdapter {
   private final boolean useTray;
   private TrayIcon trayIcon;
 
-  /** @param mainFrame The MainFrame class used for closing actions from TrayPopup. */
+  /**
+   * @param mainFrame The MainFrame class used for closing actions from TrayPopup.
+   */
   public MainWindowListener(MainFrame mainFrame) {
     useTray =
         (SystemTray.isSupported()

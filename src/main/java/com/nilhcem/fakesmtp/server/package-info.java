@@ -1,4 +1,2 @@
-/**
- * Provides services classes for the SMTP server.
- */
+/** Provides services classes for the SMTP server. */
 package com.nilhcem.fakesmtp.server;

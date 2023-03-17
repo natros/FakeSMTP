@@ -136,13 +136,17 @@ public enum ArgsHandler {
         String.format(Locale.US, "java -jar %s [OPTION]...", getJarName()), options);
   }
 
-  /** @return the file name of the program. */
+  /**
+   * @return the file name of the program.
+   */
   private String getJarName() {
     return new File(ArgsHandler.class.getProtectionDomain().getCodeSource().getLocation().getPath())
         .getName();
   }
 
-  /** @return whether or not the SMTP server must be started automatically at launch. */
+  /**
+   * @return whether or not the SMTP server must be started automatically at launch.
+   */
   public boolean shouldStartServerAtLaunch() {
     return startServerAtLaunch;
   }
@@ -156,7 +160,9 @@ public enum ArgsHandler {
     return startServerAtLaunch && backgroundStart;
   }
 
-  /** @return the port, as specified by the user, or a {@code null} string if unspecified. */
+  /**
+   * @return the port, as specified by the user, or a {@code null} string if unspecified.
+   */
   public String getPort() {
     return port;
   }

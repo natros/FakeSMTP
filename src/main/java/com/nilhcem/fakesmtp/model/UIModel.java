@@ -45,7 +45,9 @@ public enum UIModel {
    * @throws RuntimeException when an unknown exception happened.
    */
   public void toggleButton()
-      throws BindPortException, OutOfRangePortException, InvalidPortException,
+      throws BindPortException,
+          OutOfRangePortException,
+          InvalidPortException,
           InvalidHostException {
     if (started) {
       // Do nothing. We can't stop the server. User has to quit the app (issue with SubethaSMTP)

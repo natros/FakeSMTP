@@ -26,7 +26,9 @@ public class AboutActionListener implements ActionListener {
   private final I18n i18n = I18n.INSTANCE;
   private final Container parent;
 
-  /** @param parent The parent container that is used for the About dialog window. */
+  /**
+   * @param parent The parent container that is used for the About dialog window.
+   */
   public AboutActionListener(Container parent) {
     this.parent = parent;
   }

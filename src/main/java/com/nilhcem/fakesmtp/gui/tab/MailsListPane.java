@@ -41,6 +41,7 @@ public final class MailsListPane implements Observer {
   private final JScrollPane mailsListPane = new JScrollPane();
   private final SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a");
   private final int[] widths = {85, 140, 140}; // widths of columns in tab
+
   /** Table with non-editable cells. */
   private final JTable table =
       new JTable() {
@@ -51,6 +52,7 @@ public final class MailsListPane implements Observer {
           return false;
         }
       };
+
   /** Table model with non-editable cells. */
   private final DefaultTableModel model =
       new DefaultTableModel() {
