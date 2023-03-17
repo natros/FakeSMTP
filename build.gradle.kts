@@ -64,20 +64,20 @@ tasks.test {
 }
 
 dependencies {
-  implementation(libs.miglayout.swing)
-  implementation(libs.subethasmtp)
-  implementation(libs.slf4j.api)
-  implementation(libs.logback.classic)
-  implementation(libs.commons.io)
-  implementation(libs.commons.cli)
-  implementation(libs.apple.java.ext)
-  implementation(libs.flatlaf)
   implementation(libs.annotations)
+  implementation(libs.apple.java.ext)
+  implementation(libs.commons.cli)
+  implementation(libs.commons.io)
+  implementation(libs.flatlaf)
   implementation(libs.jsystem.theme.detector)
+  implementation(libs.logback.classic)
+  implementation(libs.miglayout.swing)
+  implementation(libs.slf4j.api)
+  implementation(libs.subethasmtp)
 
-  testImplementation(libs.jupiter.api)
   testImplementation(libs.assertj.core)
   testImplementation(libs.commons.email)
+  testImplementation(libs.jupiter.api)
   testRuntimeOnly(libs.jupiter.engine)
 }
 
