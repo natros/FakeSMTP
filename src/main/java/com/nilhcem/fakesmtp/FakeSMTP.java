@@ -50,13 +50,15 @@ public final class FakeSMTP {
    * @param args a list of command line parameters.
    */
   public static void main(String[] args) {
+    System.setProperty("apple.awt.application.appearance", "system");
+    System.setProperty("apple.laf.useScreenMenuBar", "true");
+
     try {
       ArgsHandler.INSTANCE.handleArgs(args);
     } catch (ParseException e) {
       ArgsHandler.INSTANCE.displayUsage();
       return;
     }
-
     if (ArgsHandler.INSTANCE.shouldStartInBackground()) {
       try {
         SMTPServerHandler.INSTANCE.startServer(getPort(), getBindAddress());
@@ -91,15 +93,16 @@ public final class FakeSMTP {
                 LOGGER.error("", e);
               }
 
-              System.setProperty("apple.laf.useScreenMenuBar", "true");
               System.setProperty(
                   "com.apple.mrj.application.apple.menu.about.name",
                   Configuration.INSTANCE.get("application.name"));
               UIManager.put("swing.boldMetal", Boolean.FALSE);
               try {
-                OsThemeDetector detector = OsThemeDetector.getDetector();
-                UIManager.setLookAndFeel(
-                    detector.isDark() ? new FlatMacDarkLaf() : new FlatMacLightLaf());
+                if (OsThemeDetector.getDetector().isDark()) {
+                  FlatMacDarkLaf.setup();
+                } else {
+                  FlatMacLightLaf.setup();
+                }
               } catch (Exception e) {
                 LOGGER.error("", e);
               }
