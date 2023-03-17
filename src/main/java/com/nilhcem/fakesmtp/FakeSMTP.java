@@ -1,7 +1,9 @@
 package com.nilhcem.fakesmtp;
 
 import com.apple.eawt.Application;
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.jthemedetecor.OsThemeDetector;
 import com.nilhcem.fakesmtp.core.ArgsHandler;
 import com.nilhcem.fakesmtp.core.Configuration;
 import com.nilhcem.fakesmtp.core.exception.UncaughtExceptionHandler;
@@ -95,7 +97,9 @@ public final class FakeSMTP {
                   Configuration.INSTANCE.get("application.name"));
               UIManager.put("swing.boldMetal", Boolean.FALSE);
               try {
-                UIManager.setLookAndFeel(new FlatLightLaf());
+                OsThemeDetector detector = OsThemeDetector.getDetector();
+                UIManager.setLookAndFeel(
+                    detector.isDark() ? new FlatMacDarkLaf() : new FlatMacLightLaf());
               } catch (Exception e) {
                 LOGGER.error("", e);
               }

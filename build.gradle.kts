@@ -73,6 +73,7 @@ dependencies {
   implementation(libs.apple.java.ext)
   implementation(libs.flatlaf)
   implementation(libs.annotations)
+  implementation(libs.jsystem.theme.detector)
 
   testImplementation(libs.jupiter.api)
   testImplementation(libs.assertj.core)

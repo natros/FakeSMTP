@@ -25,6 +25,10 @@ gradleEnterprise {
 dependencyResolutionManagement {
   repositories {
     mavenCentral()
+    maven {
+      name = "jit"
+      url = uri("https://jitpack.io")
+    }
   }
 }
 
